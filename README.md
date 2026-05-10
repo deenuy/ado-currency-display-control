@@ -1,8 +1,10 @@
 # Currency Display Control for Azure DevOps
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
-[![CI](https://github.com/deenuy/ado-currency-display-control/actions/workflows/ci.yml/badge.svg)](https://github.com/deenuy/ado-currency-display-control/actions/workflows/ci.yml)
-[![Marketplace](https://img.shields.io/badge/marketplace-currency--display--control-blue)](https://marketplace.visualstudio.com/items?itemName=deenuy.ado-currency-display-control)
+[![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/deenuy.ado-currency-display-control?label=Marketplace&color=0078d4)](https://marketplace.visualstudio.com/items?itemName=deenuy.ado-currency-display-control)
+[![GitHub Stars](https://img.shields.io/github/stars/deenuy/ado-currency-display-control?style=flat&color=ffd700)](https://github.com/deenuy/ado-currency-display-control/stargazers)
+[![Build](https://github.com/deenuy/ado-currency-display-control/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/deenuy/ado-currency-display-control/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 An Azure DevOps work item form control that renders any Integer or Double field as formatted currency — `$2K`, `€1.5M`, `₹245K`, `-$50K`. Reusable across **BU Impact**, **Estimated Cost**, **Actual Cost**, or any custom numeric field you bind it to.
 
