@@ -1,0 +1,49 @@
+{
+  "name": "ado-currency-display-control",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render any Integer or Double field on the work item form as a formatted currency value.",
+  "author": "Deenu Gengiti",
+  "license": "MIT",
+  "homepage": "https://github.com/deenuy/ado-currency-display-control#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deenuy/ado-currency-display-control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deenuy/ado-currency-display-control/issues"
+  },
+  "keywords": [
+    "azure-devops",
+    "azure-devops-extension",
+    "ado",
+    "custom-control",
+    "currency",
+    "format",
+    "work-item",
+    "pmo",
+    "portfolio"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run typecheck && npm run webpack",
+    "clean": "rimraf ./dist && rimraf ./*.vsix",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "webpack": "webpack --mode production --config webpack.config.js",
+    "test": "tsc -p tsconfig.test.json && node tests-build/tests/formatCurrency.test.js",
+    "package": "npm run build && tfx extension create --manifest-globs vss-extension.json",
+    "publish:marketplace": "npm run build && tfx extension publish --manifest-globs vss-extension.json"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "rimraf": "^5.0.5",
+    "tfx-cli": "^0.23.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "vss-web-extension-sdk": "^5.141.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

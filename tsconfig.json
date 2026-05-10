@@ -1,0 +1,22 @@
+﻿{
+  "compilerOptions": {
+    "module": "amd",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.promise",
+      "es2015.collection",
+      "es2015.core"
+    ],
+    "rootDir": "src/scripts/",
+    "outDir": "dist/",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false,
+    "esModuleInterop": true,
+    "types": ["node"]
+  },
+  "include": ["src/scripts/**/*.ts"]
+}

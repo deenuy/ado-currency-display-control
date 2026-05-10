@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<!--
+    Currency Display Control — work item form control
+    Renders a numeric field as formatted currency.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Currency Display</title>
+    <link rel="stylesheet" href="css/control.css" />
+</head>
+
+<body>
+<div id="root" class="cc-root">
+    <span id="display" class="cc-display" tabindex="0" role="textbox" aria-label="Currency value, click to edit"></span>
+    <input id="editor" class="cc-editor" type="number" inputmode="decimal" step="any" hidden />
+</div>
+
+<script src="../lib/VSS.SDK.min.js"></script>
+<script type="text/javascript">
+    VSS.init({
+        explicitNotifyLoaded: true,
+        usePlatformStyles:    true,
+        usePlatformScripts:   true,
+        setupModuleLoader:    true
+    });
+    VSS.ready(function () {
+        require(["dist/control"], function () { });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+﻿./* =====================================================================
+   Currency Display Control — minimal styling
+   Designed to blend into the work item form (height: 24px in manifest)
+
+   Author: Deenu Gengiti
+   ===================================================================== */
+
+:root {
+    --cc-text:        #201F1E;
+    --cc-text-muted:  #605E5C;
+    --cc-border:      #C8C6C4;
+    --cc-border-hover:#0078D4;
+    --cc-bg:          transparent;
+    --cc-radius:      2px;
+    --cc-font:        "Segoe UI Variable Display", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cc-text:       #F3F2F1;
+        --cc-text-muted: #C8C6C4;
+        --cc-border:     #484644;
+    }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--cc-font);
+    background: var(--cc-bg);
+}
+
+.cc-root {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.cc-display {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 24px;
+    padding: 0 6px;
+    color: var(--cc-text);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    cursor: text;
+    border-radius: var(--cc-radius);
+    border: 1px solid transparent;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cc-display:hover  { border-color: var(--cc-border); }
+.cc-display:focus  { outline: none; border-color: var(--cc-border-hover); }
+.cc-display:empty::before {
+    content: "—";
+    color: var(--cc-text-muted);
+}
+
+.cc-editor {
+    width: 100%;
+    height: 100%;
+    padding: 0 6px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--cc-text);
+    background: var(--cc-bg);
+    border: 1px solid var(--cc-border-hover);
+    border-radius: var(--cc-radius);
+    outline: none;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Strip browser spinner — admin can use up/down arrow keys */
+.cc-editor::-webkit-outer-spin-button,
+.cc-editor::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.cc-editor[type="number"] {
+    -moz-appearance: textfield;
+}

@@ -1,0 +1,88 @@
+{
+  "manifestVersion": 1,
+  "id": "ado-currency-display-control",
+  "version": "1.0.0",
+  "name": "Currency Display Control",
+  "publisher": "deenuy",
+  "description": "Render any Integer or Double field on the work item form as a formatted currency value (e.g. $2K, €1.5M). Reusable across BU Impact, Estimated Cost, Actual Cost, or any custom numeric field.",
+  "categories": ["Azure Boards"],
+  "tags": [
+    "Custom Control",
+    "Work Item",
+    "Currency",
+    "Format",
+    "Numeric",
+    "PMO",
+    "Portfolio"
+  ],
+  "targets": [
+    { "id": "Microsoft.VisualStudio.Services.Cloud" },
+    { "id": "Microsoft.TeamFoundation.Server", "version": "[15.0,)" }
+  ],
+  "scopes": ["vso.work"],
+  "icons": {
+    "default": "marketplace/logo.png"
+  },
+  "branding": {
+    "color": "rgb(0, 120, 212)",
+    "theme": "dark"
+  },
+  "content": {
+    "details":  { "path": "marketplace/overview.md" },
+    "license":  { "path": "LICENSE.md" }
+  },
+  "files": [
+    { "path": "marketplace/overview.md", "addressable": true },
+    { "path": "marketplace/logo.png",    "addressable": true },
+    { "path": "LICENSE.md",              "addressable": true },
+    { "path": "dist",                    "addressable": true },
+    { "path": "src/static",              "addressable": true, "packagePath": "static" },
+    { "path": "node_modules/vss-web-extension-sdk/lib", "addressable": true, "packagePath": "lib" }
+  ],
+  "contributions": [
+    {
+      "id": "currency-display-control",
+      "type": "ms.vss-work-web.work-item-form-control",
+      "targets": ["ms.vss-work-web.work-item-form"],
+      "properties": {
+        "name": "Currency Display",
+        "description": "Display a numeric field as formatted currency.",
+        "uri": "static/control.html",
+        "height": 24,
+        "inputs": [
+          {
+            "id": "FieldName",
+            "name": "Numeric field",
+            "description": "The Integer or Double field whose value should be formatted as currency.",
+            "type": "WorkItemField",
+            "properties": {
+              "workItemFieldTypes": ["Integer", "Double"]
+            },
+            "validation": {
+              "dataType": "String",
+              "isRequired": true
+            }
+          },
+          {
+            "id": "Currency",
+            "name": "Currency",
+            "description": "ISO 4217 code (e.g. USD, EUR, GBP, INR, JPY). Defaults to USD. Unrecognized codes fall back to showing the code as a prefix.",
+            "validation": {
+              "dataType": "String",
+              "isRequired": false
+            }
+          },
+          {
+            "id": "Style",
+            "name": "Format style",
+            "description": "compact = $2K / $1.5M (default). full = $2,000.",
+            "validation": {
+              "dataType": "String",
+              "isRequired": false
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
