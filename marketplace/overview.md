@@ -9,6 +9,8 @@ Replaces the default numeric input on the work item form with:
 - **View mode**: formatted display (`$2K`, `$1.2M`, `-$50K`)
 - **Edit mode**: click the value, type a number, blur or press Enter to save
 
+![Demo](docs/images/Demo.png)
+
 Single source of truth — the underlying numeric field. No shadow string field, no synchronization.
 
 ## Reusable across fields

@@ -1,7 +1,10 @@
 ﻿<!DOCTYPE html>
 <!--
-    Currency Display Control — work item form control
-    Renders a numeric field as formatted currency.
+    Currency Display Control — work item form control iframe shell.
+
+    The ADO form host embeds this HTML inside a sized iframe for each
+    field binding. The bundle (dist/control.js) is loaded after the SDK
+    is initialised; it owns VSS.register and VSS.notifyLoadSucceeded.
 -->
 <html lang="en">
 
@@ -13,8 +16,17 @@
 
 <body>
 <div id="root" class="cc-root">
-    <span id="display" class="cc-display" tabindex="0" role="textbox" aria-label="Currency value, click to edit"></span>
-    <input id="editor" class="cc-editor" type="number" inputmode="decimal" step="any" hidden />
+        <span id="display"
+              class="cc-display"
+              tabindex="0"
+              role="textbox"
+              aria-label="Currency value, click to edit"></span>
+    <input id="editor"
+           class="cc-editor"
+           type="number"
+           inputmode="decimal"
+           step="any"
+           style="display:none" />
 </div>
 
 <script src="../lib/VSS.SDK.min.js"></script>
@@ -25,8 +37,23 @@
         usePlatformScripts:   true,
         setupModuleLoader:    true
     });
+
     VSS.ready(function () {
-        require(["dist/control"], function () { });
+        // The AMD baseUrl is set to the package root by setupModuleLoader.
+        // "dist/control" resolves to <pkgRoot>/dist/control.js inside the .vsix.
+        // Do NOT use "../dist/control" — that resolves outside the package.
+        VSS.require(
+            ["dist/control"],
+            function () {
+                // control.ts owns VSS.register and VSS.notifyLoadSucceeded;
+                // nothing more to do here.
+            },
+            function (err) {
+                // Module failed to load. Tell the host so it doesn't hang.
+                console.error("[CurrencyControl] Failed to load control bundle:", err);
+                VSS.notifyLoadFailed(err && err.message ? err.message : String(err));
+            }
+        );
     });
 </script>
 </body>

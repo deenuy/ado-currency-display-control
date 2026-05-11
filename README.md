@@ -8,7 +8,7 @@
 
 An Azure DevOps work item form control that renders any Integer or Double field as formatted currency — `$2K`, `€1.5M`, `₹245K`, `-$50K`. Reusable across **BU Impact**, **Estimated Cost**, **Actual Cost**, or any custom numeric field you bind it to.
 
-![Demo](docs/images/demo.gif)
+![Demo](docs/images/Demo.png)
 
 ## Why
 

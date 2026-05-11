@@ -16,7 +16,7 @@
     "noImplicitAny": false,
     "strict": false,
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["vss-web-extension-sdk"]
   },
   "include": ["src/scripts/**/*.ts"]
 }

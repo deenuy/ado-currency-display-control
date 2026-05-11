@@ -5,6 +5,54 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## ## [1.0.10] — 2026-05-10
+
+Initial production release.
+
+### Added
+- Custom work item form control that renders Integer/Double fields as formatted currency (`$2K`, `€1.5M`, `₹245K`).
+- Click-to-edit interaction: click or focus the display to switch to a numeric input; commit on blur or Enter; revert on Escape.
+- Three configurable inputs per binding: `FieldName` (required), `Currency` (ISO 4217, default USD), `Style` (compact or full).
+- Currency symbol support for USD, EUR, GBP, JPY, INR, CAD, AUD, NZD, SGD, HKD, CNY, KRW, CHF, SEK, NOK, DKK, BRL, MXN, ZAR, PLN, TRY. Unknown codes fall back to `<CODE> <value>`.
+- Negative-value rendering with leading minus (`-$50K`).
+- Dark-mode support via `prefers-color-scheme`.
+- No-op `onSaved` and `onUnloaded` lifecycle stubs to silence host console warnings.
+- Unit test suite for the formatter covering all tiers, currencies, edge cases, and unknown-code fallback.
+
+### Fixed
+- Display and editor render correctly (one at a time) via inline `style.display` toggles, which beat ADO iframe stylesheet specificity that overrode the HTML `hidden` attribute.
+- Display refreshes immediately after value changes — no work-item reload required. `onFieldChanged` handles all `args.changedFields` shapes (object, array, missing) returned across SDK versions.
+- In-form edits no longer revert when switching fields. `getFieldValue` is called without `returnOriginalValue=true`, so reads return the form's current dirty state instead of the last-saved value.
+- Click-to-edit no longer triggers spurious commits via blur re-entry; `editing` flag is cleared before any async work in `commit()`.
+- Editor-host race during commit is prevented by a `committing` flag that suppresses `onFieldChanged`-driven re-renders for the duration of a write.
+- Read-only state is read from `onLoaded` args (the only valid SDK source) instead of a non-existent service method.
+- AMD module path resolves correctly from the package root (`dist/control`, not `../dist/control`), and load failures are surfaced to the host via `notifyLoadFailed` instead of hanging.
+
+### Security
+- Scope limited to `vso.work` (read/write the bound field only).
+- No telemetry, no external network calls, no third-party CDN dependencies.
+
+### Compatibility
+- Azure DevOps Services (all current versions).
+- Azure DevOps Server 2018+ (TFS 15.0+).
+- Modern browsers (Chrome 90+, Edge 90+, Firefox 88+, Safari 14+).
+- Node 18+ for building from source.
+
+## [1.0.7] — 2026-05-10
+
+### Fixed
+- Click-to-edit no longer fails silently with `TypeError: isReadOnly is not a function`. The control previously called a non-existent SDK method to check read-only state. Now reads `isReadOnly` from the `onLoaded` args provided by the dashboard host, which is the correct path for the `vss-web-extension-sdk`.
+
+### Added
+- Diagnostic console logs (`[CurrencyControl] ...`) in event handlers to surface async errors that would otherwise be swallowed by the browser. Will be removed in a future version once the control is confirmed stable in production.
+
+## [1.0.1] — 2026-05-10
+
+### Fixed
+- Control no longer triggers "taking longer than expected" banner on the work item form. The SDK's `notifyLoadSucceeded` is now called after contribution registration rather than after each work item loads, matching the pattern expected by ADO's iframe host.
+- AMD module path in `control.html` now resolves correctly relative to the package root, fixing 404 on `dist/control.js` after upload.
+- Removed an unnecessary `VSS.getService(ExtensionData)` chain in `getService()` that could fail silently and block rendering.
+
 ## [1.0.0] — 2026-05-10
 
 Initial public release.
